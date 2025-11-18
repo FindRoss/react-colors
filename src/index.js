@@ -4,7 +4,7 @@ import App from './App';
 
 import { Provider } from 'react-redux';
 import { configureStore } from "@reduxjs/toolkit";
-import paletteReducer from "./features/Foobar";
+import paletteReducer from "./features/helpers";
 
 const store = configureStore({
   reducer: {

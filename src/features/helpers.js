@@ -28,7 +28,7 @@ export const paletteSlice = createSlice({
     addPane: (state, action) => {
       state.value.map(pal => {
         if (pal.id === action.payload.id) {
-          pal.colors.push({ hex: action.payload.color })
+          return pal.colors.push({ hex: action.payload.color })
         }
       })
     },
@@ -38,17 +38,12 @@ export const paletteSlice = createSlice({
         if (pane.id === action.payload.id) {
           pane.colors.map((color, index) => {
             if (index === action.payload.index) {
-              color.hex = action.payload.color;
+              return color.hex = action.payload.color;
             }
           });
         }
       });
     },
-
-
-
-
-
   }
 });
 

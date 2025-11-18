@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Pane from './Pane'
-import { updateTitle, addPane } from '../features/Foobar';
+import { updateTitle, addPane } from '../features/helpers';
 import { getRandomColor } from '../randomColor'
 
 import { IconButton, TextField, Button, Typography } from '@mui/material'
@@ -30,7 +30,7 @@ function Palette() {
   }
 
 
-  if (palette && palette !== {}) {
+  if (palette) {
     return (
       <>
         <div className="color--palette">

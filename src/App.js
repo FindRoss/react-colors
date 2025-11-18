@@ -4,7 +4,6 @@ import './App.css';
 import Header from './components/Header';
 import Home from './components/Home';
 import Palette from './components/Palette';
-
 import Container from '@mui/material/Container';
 
 function App() {

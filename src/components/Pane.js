@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { deletePane, updateColor } from '../features/Foobar';
+import { deletePane, updateColor } from '../features/helpers';
 
 import { getRandomColor } from '../randomColor'
 

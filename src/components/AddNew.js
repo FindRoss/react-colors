@@ -7,7 +7,7 @@ import { getRandomColor } from '../randomColor'
 import { Button } from '@mui/material'
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
-import { addPalette } from '../features/Foobar';
+import { addPalette } from '../features/helpers';
 
 const addNewCont = {
   display: 'flex',
