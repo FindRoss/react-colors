@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Pane from './Pane'
 import { updateTitle, addPane } from '../features/helpers';
 import { getRandomColor } from '../randomColor'
+import { RootState } from '../store';
 
 import { IconButton, TextField, Button, Typography } from '@mui/material'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -11,26 +12,30 @@ import EditIcon from '@mui/icons-material/Edit';
 
 function Palette() {
   const dispatch = useDispatch();
-  const { id } = useParams();
-  const palette = useSelector((state) => state.foobar.value.filter(pal => pal.id === id)[0]);
-  const { title, colors } = palette;
+  const { id } = useParams<'id'>();
+  const palette = useSelector((state: RootState) => state.foobar.value.filter(pal => pal.id === id)[0]);
 
   const [inputTitle, updateInputTitle] = useState("")
   const [showTitle, setShowTitle] = useState(true)
 
-  function handleTitleSubmit(e) {
+  if (!id) {
+    return <div>No palette found, sorry.</div>;
+  }
+
+  function handleTitleSubmit(e: FormEvent) {
     e.preventDefault();
-    dispatch(updateTitle({ id, title: inputTitle }));
+    dispatch(updateTitle({ id: id!, title: inputTitle }));
     setShowTitle(true)
   }
 
   function handleAddPane() {
     const newColor = getRandomColor();
-    dispatch(addPane({ id, color: newColor }))
+    dispatch(addPane({ id: id!, color: newColor }))
   }
 
 
   if (palette) {
+    const { title, colors } = palette;
     return (
       <>
         <div className="color--palette">
@@ -48,7 +53,7 @@ function Palette() {
                 <TextField
                   variant="outlined"
                   type="text"
-                  classNane="title-input"
+                  className="title-input"
                   value={inputTitle}
                   label="title"
                   size="small"
@@ -67,7 +72,7 @@ function Palette() {
               key={index}
               index={index}
               color={color.hex}
-              id={id}
+              id={id!}
             />
           )
           )}

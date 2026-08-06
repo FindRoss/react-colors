@@ -1,11 +1,11 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
 import { NavLink } from "react-router-dom";
 import AddNew from './AddNew';
 import { Card, CardActionArea, CardHeader } from '@mui/material'
+import { RootState } from '../store';
 
 function Home() {
-  const palettes = useSelector((state) => state.foobar.value)
+  const palettes = useSelector((state: RootState) => state.foobar.value)
 
   return (
     <div>

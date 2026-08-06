@@ -13,7 +13,7 @@ function App() {
       <Header />
       <Container maxWidth="md">
         <Routes>
-          <Route exact path="/" element={<Home />}></Route>
+          <Route path="/" element={<Home />}></Route>
           <Route path="/palette/:id" element={<Palette />}></Route>
         </Routes>
       </Container>

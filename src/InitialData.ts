@@ -1,6 +1,8 @@
-export const initialData = [
+import { Palette } from './types';
+
+export const initialData: Palette[] = [
   {
-    title: 'Website',
+    title: 'Website palette',
     id: '5426432',
     colors: [
       {
@@ -12,7 +14,7 @@ export const initialData = [
     ]
   },
   {
-    title: 'Project colors',
+    title: 'New project',
     id: '42336331',
     colors: [
       {

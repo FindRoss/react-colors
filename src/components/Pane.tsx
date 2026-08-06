@@ -58,13 +58,19 @@ const useStyles = {
   }
 }
 
-function Pane({ color, index, id }) {
+type PaneProps = {
+  color: string;
+  index: number;
+  id: string;
+};
+
+function Pane({ color, index, id }: PaneProps) {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
 
   const bg = { backgroundColor: `${color}` }
 
-  function copyTextToClipboard(text) {
+  function copyTextToClipboard(text: string) {
     navigator.clipboard.writeText(text).then(function () {
       console.log('Async: Copying to clipboard was successful!');
       setTimeout(() => setOpen(false), 1500)
