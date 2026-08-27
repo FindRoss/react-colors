@@ -13,7 +13,7 @@ import EditIcon from '@mui/icons-material/Edit';
 function Palette() {
   const dispatch = useDispatch();
   const { id } = useParams<'id'>();
-  const palette = useSelector((state: RootState) => state.foobar.value.filter(pal => pal.id === id)[0]);
+  const palette = useSelector((state: RootState) => state.palettes.value.filter(pal => pal.id === id)[0]);
 
   const [inputTitle, updateInputTitle] = useState("")
   const [showTitle, setShowTitle] = useState(true)

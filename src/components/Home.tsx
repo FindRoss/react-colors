@@ -5,7 +5,7 @@ import { Card, CardActionArea, CardHeader } from '@mui/material'
 import { RootState } from '../store';
 
 function Home() {
-  const palettes = useSelector((state: RootState) => state.foobar.value)
+  const palettes = useSelector((state: RootState) => state.palettes.value)
 
   return (
     <div>

@@ -3,7 +3,7 @@ import paletteReducer from './features/helpers';
 
 export const store = configureStore({
   reducer: {
-    foobar: paletteReducer
+    palettes: paletteReducer
   }
 });
 

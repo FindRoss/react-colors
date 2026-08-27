@@ -3,7 +3,7 @@ import { initialData } from '../InitialData';
 import { Palette } from '../types'
 
 export const paletteSlice = createSlice({
-  name: "foobar",
+  name: "palettes",
   initialState: { value: initialData },
   reducers: {
     addPalette: (state, action: PayloadAction<Palette>) => {
