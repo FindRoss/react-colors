@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChangeEvent, useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { deletePane, updateColor } from '../features/helpers';
 
@@ -65,14 +65,16 @@ type PaneProps = {
 };
 
 function Pane({ color, index, id }: PaneProps) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
+  const [bgColor, setBgColor] = useState<string>(color);
   const dispatch = useDispatch();
 
-  const bg = { backgroundColor: `${color}` }
+  useEffect(() => {
+    setBgColor(color);
+  }, [color]);
 
   function copyTextToClipboard(text: string) {
     navigator.clipboard.writeText(text).then(function () {
-      console.log('Async: Copying to clipboard was successful!');
       setTimeout(() => setOpen(false), 1500)
     }, function (err) {
       console.error('Async: Could not copy text: ', err);
@@ -80,7 +82,7 @@ function Pane({ color, index, id }: PaneProps) {
   };
 
   function handleCopy() {
-    copyTextToClipboard(color);
+    copyTextToClipboard(bgColor);
     setOpen(true);
   };
 
@@ -90,22 +92,32 @@ function Pane({ color, index, id }: PaneProps) {
 
   function handleColorChange() {
     const randomColor = getRandomColor();
-    console.log(index);
     dispatch(updateColor({ id, index, color: randomColor }))
+  };
+
+  function handleFieldChange(e: ChangeEvent<HTMLInputElement>) {
+    setBgColor(e.target.value);
+  };
+
+  function handleFieldBlur() {
+    dispatch(updateColor({ id, index, color: bgColor }));
   };
 
   return (
     <>
       <div
-        style={bg}
+        style={{backgroundColor: `${bgColor}`}}
         className="color--pane">
         <div className="color--pane__content">
           <div style={useStyles.hexBox}>
             <TextField
-              multiline
+              inputProps={{ maxLength: 7 }}
               variant="outlined"
-              value={color}
+              placeholder="#F7F7F7"
+              value={bgColor}
               style={useStyles.inputRoot}
+              onChange={handleFieldChange}
+              onBlur={handleFieldBlur}
             />
             <Tooltip
               style={useStyles.tools}
