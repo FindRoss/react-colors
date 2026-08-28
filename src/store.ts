@@ -1,10 +1,18 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import paletteReducer from './features/helpers';
+import { loadState, saveState } from './localStorage';
 
-export const store = configureStore({
-  reducer: {
-    palettes: paletteReducer
-  }
+const rootReducer = combineReducers({
+  palettes: paletteReducer
 });
 
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof rootReducer>;
+
+export const store = configureStore({
+  reducer: rootReducer,
+  preloadedState: loadState()
+});
+
+store.subscribe(() => {
+  saveState(store.getState());
+});
